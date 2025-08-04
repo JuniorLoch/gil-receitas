@@ -1,0 +1,16 @@
+{
+  "workbench.colorCustomizations": {
+    "commandCenter.border": "#e7e7e799",
+    "statusBar.background": "#003e80",
+    "statusBar.foreground": "#e7e7e7",
+    "statusBarItem.hoverBackground": "#0057b3",
+    "statusBarItem.remoteBackground": "#003e80",
+    "statusBarItem.remoteForeground": "#e7e7e7",
+    "titleBar.activeBackground": "#003e80",
+    "titleBar.activeForeground": "#e7e7e7",
+    "titleBar.inactiveBackground": "#003e8099",
+    "titleBar.inactiveForeground": "#e7e7e799"
+  },
+  "peacock.color": "#003e80",
+  "eslint.useFlatConfig": true
+}
