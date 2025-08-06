@@ -1,13 +1,28 @@
-import { Alert } from '@chakra-ui/react'
+import { GridItem } from '@chakra-ui/react'
+import { GraficoLinha } from './components/grafico-linha'
+import { GilGrid } from '../components/GilGrid'
+import { GilCard } from '../components/gil-card'
+import { GraficoBarra } from './components/grafico-barra'
+import { ListaBarra } from './components/lista-barra'
 
 export default function HomePage() {
   return (
-    <Alert.Root status='success'>
-      <Alert.Indicator />
-      <Alert.Content>
-        <Alert.Title>Página de inicial</Alert.Title>
-        <Alert.Description>Essa é a pagina inicial</Alert.Description>
-      </Alert.Content>
-    </Alert.Root>
+    <GilGrid>
+      <GridItem colSpan={4}>
+        <GilCard title='Grafico 1'>
+          <GraficoLinha />
+        </GilCard>
+      </GridItem>
+      <GridItem colSpan={4}>
+        <GilCard title='Grafico 2'>
+          <GraficoBarra />
+        </GilCard>
+      </GridItem>
+      <GridItem colSpan={4}>
+        <GilCard title='Grafico 3'>
+          <ListaBarra />
+        </GilCard>
+      </GridItem>
+    </GilGrid>
   )
 }

@@ -1,5 +1,5 @@
-import { HStack } from '@chakra-ui/react'
+import { redirect } from 'next/navigation'
 
 export default function Home() {
-  return <HStack>bomdia</HStack>
+  return redirect('/home')
 }
