@@ -17,14 +17,6 @@ export function Sidebar() {
       borderRightWidth={1}
       borderRightStyle={'solid'}
       bg={'bg.muted'}
-      // _dark={{
-      //   borderRightColor: 'cyan.700',
-      //   backgroundColor: 'blue.800',
-      // }}
-      // _light={{
-      //   borderRightColor: 'grey.700',
-      //   backgroundColor: 'blue.50',
-      // }}
       zIndex={1}
     >
       <Stack>
