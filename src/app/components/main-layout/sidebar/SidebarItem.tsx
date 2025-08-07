@@ -12,7 +12,8 @@ export function SidebarItem({ icon, text, link, isCollapsed }: SidebarItemCompon
       asChild
       className={'group'}
       cursor={'pointer'}
-      _hover={{ _dark: { bg: 'blue.500' }, _light: { bg: 'blue.300' } }}
+      // _hover={{ _dark: { bg: 'blue.500' }, _light: { bg: 'blue.300' } }}
+      _hover={{ bg: 'blue.subtle' }}
       p={2}
     >
       <Link href={link}>

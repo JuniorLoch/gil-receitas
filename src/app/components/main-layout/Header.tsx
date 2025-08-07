@@ -7,7 +7,7 @@ import { appName } from '@/constants/app-name.const'
 
 export function Header() {
   return (
-    <Flex justifyContent={'space-between'} _dark={{ bg: 'blue.800' }} _light={{ bg: 'blue.50' }} p={2}>
+    <Flex justifyContent={'space-between'} bg={'bg.muted'} p={2}>
       <HStack>
         <Image asChild borderRadius='full' fit='cover' alt='Logotipo'>
           <NextImage alt='Logotipo' width={50} height={50} src={'/images/gil-receitas.png'}></NextImage>
