@@ -8,9 +8,20 @@ interface SidebarItemComponentProps extends SidebarItemProps {
 
 export function SidebarItem({ icon, text, link, isCollapsed }: SidebarItemComponentProps) {
   return (
-    <List.Item asChild p={2} cursor='pointer' _hover={{ _dark: { bg: 'blue.500' }, _light: { bg: 'blue.300' } }}>
+    <List.Item
+      asChild
+      className={'group'}
+      cursor={'pointer'}
+      _hover={{ _dark: { bg: 'blue.500' }, _light: { bg: 'blue.300' } }}
+      p={2}
+    >
       <Link href={link}>
-        <HStack gap={0} transition={'all 250ms'} {...(isCollapsed && { _hover: { transform: 'translate(10px)' } })}>
+        <HStack
+          w={'100%'}
+          gap={0}
+          transition={'transform 150ms'}
+          {...(isCollapsed && { _groupHover: { transform: 'translate(10px)' } })}
+        >
           <List.Indicator asChild>
             <Icon asChild size={'lg'}>
               {icon}
