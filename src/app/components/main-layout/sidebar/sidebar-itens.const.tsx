@@ -1,7 +1,7 @@
 import { ReactNode } from 'react'
 import { LuChefHat, LuClipboardList, LuHouse } from 'react-icons/lu'
 
-export interface SidebarItemProps {
+export type SidebarItemProps = {
   text: string
   icon: ReactNode
   link: string

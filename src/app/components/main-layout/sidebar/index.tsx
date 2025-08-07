@@ -40,7 +40,13 @@ export function Sidebar() {
         </HStack>
         <List.Root gap={0}>
           {sidebarItens.map((item, index) => (
-            <SidebarItem key={index} icon={item.icon} text={open ? item.text : ''} link={item.link} />
+            <SidebarItem
+              key={index}
+              icon={item.icon}
+              text={open ? item.text : ''}
+              link={item.link}
+              isCollapsed={open}
+            />
           ))}
         </List.Root>
       </Stack>

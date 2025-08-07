@@ -2,23 +2,21 @@ import { HStack, Icon, List, Text } from '@chakra-ui/react'
 import { SidebarItemProps } from './sidebar-itens.const'
 import Link from 'next/link'
 
-export function SidebarItem({ icon, text, link }: SidebarItemProps) {
+interface SidebarItemComponentProps extends SidebarItemProps {
+  isCollapsed: boolean
+}
+
+export function SidebarItem({ icon, text, link, isCollapsed }: SidebarItemComponentProps) {
   return (
-    <List.Item asChild>
+    <List.Item asChild p={2} cursor='pointer' _hover={{ _dark: { bg: 'blue.500' }, _light: { bg: 'blue.300' } }}>
       <Link href={link}>
-        <HStack
-          gap={0}
-          p={2}
-          cursor='pointer'
-          _hover={{ _dark: { bg: 'blue.500' }, _light: { bg: 'blue.300' } }}
-          rounded='md'
-        >
+        <HStack gap={0} transition={'all 250ms'} {...(isCollapsed && { _hover: { transform: 'translate(10px)' } })}>
           <List.Indicator asChild>
             <Icon asChild size={'lg'}>
               {icon}
             </Icon>
           </List.Indicator>
-          <Text>{text}</Text>
+          <Text whiteSpace={'nowrap'}>{text}</Text>
         </HStack>
       </Link>
     </List.Item>
