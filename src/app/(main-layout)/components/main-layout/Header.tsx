@@ -10,7 +10,7 @@ export function Header() {
     <Flex justifyContent={'space-between'} bg={'bg.muted'} p={2}>
       <HStack>
         <Image asChild borderRadius='full' fit='cover' alt='Logotipo'>
-          <NextImage alt='Logotipo' width={50} height={50} src={'/images/gil-receitas.png'}></NextImage>
+          <NextImage alt='Logotipo' width={50} height={50} src={'/images/logo-light.png'}></NextImage>
         </Image>
         <Heading size='lg'>{appName}</Heading>
       </HStack>

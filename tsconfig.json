@@ -5,7 +5,8 @@
     "moduleResolution": "Bundler",
     "skipLibCheck": true,
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@images/*": ["./public/images/*"]
     },
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,

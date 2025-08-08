@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
 import { Montserrat } from 'next/font/google'
 import { Provider } from '@/components/ui/provider'
-import { MainLayout } from './components/main-layout'
+
+import { Toaster } from './(main-layout)/components/toaster'
 
 const montserratSans = Montserrat({
   variable: '--font-montserrat-sans',
@@ -22,7 +23,8 @@ export default function RootLayout({
     <html suppressHydrationWarning lang='pt-br'>
       <body className={`${montserratSans.variable}`}>
         <Provider>
-          <MainLayout>{children}</MainLayout>
+          <Toaster />
+          {children}
         </Provider>
       </body>
     </html>

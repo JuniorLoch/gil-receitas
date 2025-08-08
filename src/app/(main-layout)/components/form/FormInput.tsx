@@ -14,9 +14,9 @@ export function FormInput({ label, required, name, loading, ...props }: FormInpu
 
   return (
     <Field.Root required={!!required} invalid={invalid}>
-      {!!label && <Field.Label color={'blue.500'}>{label}</Field.Label>}
+      {!!label && <Field.Label>{label}</Field.Label>}
       <InputGroup endElement={loading && <Spinner size='md' color='yellow.800' />}>
-        <Input {...field} {...props} variant={'flushed'} fontSize={['sm', 'sm', 'md', 'md']} />
+        <Input {...field} {...props} variant={'outline'} fontSize={['sm', 'sm', 'md', 'md']} />
       </InputGroup>
       {invalid && <Field.ErrorText color={'red.500'}>{meta.error}</Field.ErrorText>}
     </Field.Root>

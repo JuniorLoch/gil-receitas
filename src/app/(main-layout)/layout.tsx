@@ -1,9 +1,10 @@
-import { GenericComponent } from '@/interfaces/generic-component'
-import { Box, HStack, Stack } from '@chakra-ui/react'
-import { Header } from './Header'
-import { Sidebar } from './sidebar'
+import { GenericLayout } from '@/interfaces/generic-layout'
 
-export function MainLayout({ children }: GenericComponent) {
+import { Box, HStack, Stack } from '@chakra-ui/react'
+import { Header } from './components/main-layout/Header'
+import { Sidebar } from './components/main-layout/sidebar'
+
+export default function MainLayout({ children }: GenericLayout<undefined>) {
   return (
     <Stack gap={0} overflow={'hidden'} maxH={'100vh'}>
       <Header />

@@ -4,6 +4,7 @@ import { readDataListener, writeDataOvewrite } from '@/services/firebase/databas
 import { Button, Heading, List, Stack } from '@chakra-ui/react'
 import { nanoid } from 'nanoid'
 import { useEffect, useState } from 'react'
+import { toast } from 'react-toastify'
 
 export function TesteDatabase() {
   const [values, setValues] = useState<Record<string, { bomdia: string }>>()
@@ -22,10 +23,16 @@ export function TesteDatabase() {
     <>
       <Stack gap={3}>
         <Button
-          onClick={() => {
+          onClick={async () => {
             const randomN = nanoid(5)
 
-            writeDataOvewrite(`bomdia/${randomN}`, () => ({ bomdia: `bomdia-${randomN}` }))
+            const writeDataPromise = writeDataOvewrite(`bomdia/${randomN}`, () => ({ bomdia: `bomdia-${randomN}` }))
+
+            toast.promise(writeDataPromise, {
+              error: 'Ocorreu um erro ao cadastrar bomdia',
+              pending: 'Bomdia está sendo cadastrado',
+              success: 'Bomdia cadastrado com sucesso!',
+            })
           }}
         >
           Salvar 'bomdia' no firebase
