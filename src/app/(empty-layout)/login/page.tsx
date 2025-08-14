@@ -2,15 +2,13 @@
 
 import { GilGrid } from '@/app/(main-layout)/components/GilGrid'
 import { ColorModeButton } from '@/components/ui/color-mode'
-import { AspectRatio, Box, Flex, GridItem } from '@chakra-ui/react'
+import { AspectRatio, GridItem } from '@chakra-ui/react'
 import { FormLogin } from './FormLogin'
 import bannerLoginImageLight from '@images/banner-paes-light.png'
 import bannerLoginImageDark from '@images/banner-paes-dark.png'
 import NextImage from 'next/image'
 
 export default function LoginPage() {
-  // const { colorMode } = useColorMode()
-
   return (
     <>
       <ColorModeButton position={'absolute'} zIndex={1} right={0} />
