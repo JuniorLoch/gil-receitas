@@ -9,7 +9,7 @@ import LogoDark from '@images/logo-dark.png'
 import { GoogleLoginButton } from './GoogleLoginButton'
 import { boolean, InferType, object, string } from 'yup'
 import { FormCheckbox } from '@/app/(main-layout)/components/form/FormCheckbox'
-import { useAuth } from '@/app/AuthContext'
+import { useAuth } from '@/app/components/auth-context/context'
 
 const loginFormValidationSchema = object({
   email: string().email('Email inválido').required('O email é obrigatório'),

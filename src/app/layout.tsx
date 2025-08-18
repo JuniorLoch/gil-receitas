@@ -3,7 +3,8 @@ import { Montserrat } from 'next/font/google'
 import { Provider } from '@/components/ui/provider'
 
 import { Toaster } from './(main-layout)/components/toaster'
-import { AuthProvider } from './AuthContext'
+import { AuthProvider } from './components/auth-context'
+import { RouteGuard } from './components/route-guard'
 
 const montserratSans = Montserrat({
   variable: '--font-montserrat-sans',
@@ -25,8 +26,10 @@ export default function RootLayout({
       <body className={`${montserratSans.variable}`}>
         <Provider>
           <AuthProvider>
-            <Toaster />
-            {children}
+            <RouteGuard>
+              <Toaster />
+              {children}
+            </RouteGuard>
           </AuthProvider>
         </Provider>
       </body>
