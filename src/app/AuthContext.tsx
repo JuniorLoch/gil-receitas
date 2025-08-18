@@ -1,49 +1,87 @@
 'use client'
 
-import { GenericComponent } from '@/interfaces/generic-component'
-import { firebaseLoginInWithGoogle, firebaseLoginWithCredentials, firebaseLogout } from '@/services/firebase/auth'
-import { createContext, useContext, useState } from 'react'
-import { User } from 'firebase/auth'
-import { LoginFormProps } from './(empty-layout)/login/FormLogin'
+import { createContext, useContext, useEffect, useMemo, useState } from 'react'
+import type { User } from 'firebase/auth'
+import {
+  firebaseLoginInWithGoogle,
+  firebaseLoginWithCredentials,
+  firebaseLogout,
+  onAppAuthStateChanged,
+} from '@/services/firebase/auth'
+import type { GenericComponent } from '@/interfaces/generic-component'
+import type { LoginFormProps } from './(empty-layout)/login/FormLogin'
+import { clearRememberFlag, setRememberFlag } from '@/services/local-storage/remember-me'
 
 export type LoginMethods = 'Credentials' | 'Google'
 
-const loginMethodsFunctions: Record<LoginMethods, (credentials?: LoginFormProps) => Promise<User | undefined>> = {
-  Credentials: credentials => firebaseLoginWithCredentials(credentials as LoginFormProps),
-  Google: () => firebaseLoginInWithGoogle(),
-}
-
-interface AuthContextProps {
-  userData?: User
-  login: (method: LoginMethods, credentials?: LoginFormProps) => void
-  logout: () => void
+type AuthContextProps = {
+  userData: User | null
+  loading: Record<LoginMethods, boolean>
+  login: (method: LoginMethods, credentials?: LoginFormProps, options?: { remember: boolean }) => Promise<void>
+  logout: () => Promise<void>
 }
 
 const AuthContext = createContext<AuthContextProps>({
-  login: () => {},
-  logout: () => {},
-  //@ts-expect-error ✅ Valor inicial nunca utilizado
-  userData: {},
+  userData: null,
+  loading: { Credentials: false, Google: false },
+  login: async () => {},
+  logout: async () => {},
 })
 
-interface AuthProviderProps extends GenericComponent {
-  bomdia: any
-}
+const loginLoadingTrue = { Credentials: true, Google: true }
+const loginLoadingFalse = { Credentials: true, Google: true }
 
-export function AuthProvider({ children }: AuthProviderProps) {
-  const [userData, setUserData] = useState<User>()
+export function AuthProvider({ children }: GenericComponent) {
+  const [userData, setUserData] = useState<User | null>(null)
+  const [loading, setLoading] = useState<Record<LoginMethods, boolean>>({ Credentials: false, Google: false })
+
+  useEffect(() => {
+    setLoading(loginLoadingTrue)
+    const unsubscribe = onAppAuthStateChanged(user => {
+      setUserData(user)
+      setLoading(loginLoadingFalse)
+    })
+
+    return () => {
+      unsubscribe()
+    }
+  }, [])
+
+  const loginMethodsFunctions: Record<LoginMethods, (credentials?: LoginFormProps) => Promise<User>> = {
+    Credentials: async credentials => {
+      return firebaseLoginWithCredentials(credentials!)
+    },
+    Google: async () => {
+      return firebaseLoginInWithGoogle()
+    },
+  }
 
   async function login(method: LoginMethods, credentials?: LoginFormProps) {
-    const firebaseUser = await loginMethodsFunctions[method](credentials)
+    setLoading(prev => ({ ...prev, [method]: true }))
 
-    setUserData(firebaseUser)
+    const user = await loginMethodsFunctions[method](credentials)
+    setUserData(user)
+
+    if (credentials?.lembrarLogin) {
+      setRememberFlag(true)
+    }
+
+    setLoading(prev => ({ ...prev, [method]: false }))
   }
 
-  function logout() {
-    return firebaseLogout()
+  async function logout() {
+    setLoading(loginLoadingTrue)
+
+    await firebaseLogout()
+    setUserData(null)
+    clearRememberFlag()
+
+    setLoading(loginLoadingFalse)
   }
 
-  return <AuthContext.Provider value={{ userData, login, logout }}>{children}</AuthContext.Provider>
+  const value = useMemo(() => ({ userData, loading, login, logout }), [userData, loading])
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }
 
 export function useAuth() {

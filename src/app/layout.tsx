@@ -3,6 +3,7 @@ import { Montserrat } from 'next/font/google'
 import { Provider } from '@/components/ui/provider'
 
 import { Toaster } from './(main-layout)/components/toaster'
+import { AuthProvider } from './AuthContext'
 
 const montserratSans = Montserrat({
   variable: '--font-montserrat-sans',
@@ -23,8 +24,10 @@ export default function RootLayout({
     <html suppressHydrationWarning lang='pt-br'>
       <body className={`${montserratSans.variable}`}>
         <Provider>
-          <Toaster />
-          {children}
+          <AuthProvider>
+            <Toaster />
+            {children}
+          </AuthProvider>
         </Provider>
       </body>
     </html>

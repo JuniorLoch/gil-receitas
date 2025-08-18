@@ -7,11 +7,14 @@ import NextImage from 'next/image'
 import LogoLight from '@images/logo-light.png'
 import LogoDark from '@images/logo-dark.png'
 import { GoogleLoginButton } from './GoogleLoginButton'
-import { InferType, object, string } from 'yup'
+import { boolean, InferType, object, string } from 'yup'
+import { FormCheckbox } from '@/app/(main-layout)/components/form/FormCheckbox'
+import { useAuth } from '@/app/AuthContext'
 
 const loginFormValidationSchema = object({
   email: string().email('Email inválido').required('O email é obrigatório'),
   senha: string().min(8, 'A senha deve ter pelo menos 8 caracteres').required('A senha é obrigatória'),
+  lembrarLogin: boolean().default(false),
 })
 
 export type LoginFormProps = InferType<typeof loginFormValidationSchema>
@@ -19,9 +22,12 @@ export type LoginFormProps = InferType<typeof loginFormValidationSchema>
 const loginFormInitialValues: LoginFormProps = {
   email: '',
   senha: '',
+  lembrarLogin: false,
 }
 
 export function FormLogin() {
+  const { login, loading } = useAuth()
+
   return (
     <VGilGrid w={'100%'} h={'100%'} p={4}>
       <GridItem asChild rowSpan={5}>
@@ -40,19 +46,22 @@ export function FormLogin() {
           validationSchema={loginFormValidationSchema}
           onSubmit={values => {
             console.log('Valores do login->', values)
+            login('Credentials', values)
           }}
         >
-          <Stack asChild gap={8}>
+          <Stack asChild gap={5}>
             <Form>
               <FormInput name={'email'} label={'Email'} />
               <FormInput name={'senha'} type={'password'} label={'Senha'} />
+              <FormCheckbox name={'lembrarLogin'}>Lembrar de mim nesse computador</FormCheckbox>
               <Stack gap={2}>
-                <Button w={'100%'} type={'submit'}>
+                <Button w={'100%'} type={'submit'} loading={loading.Credentials}>
                   Enviar
                 </Button>
                 <GoogleLoginButton
+                  loading={loading.Google}
                   onClick={() => {
-                    alert('CLICOIUIQWDJOIQWJDO')
+                    login('Google')
                   }}
                 />
               </Stack>

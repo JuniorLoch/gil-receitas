@@ -1,6 +1,5 @@
 'use client'
 
-// Import the functions you need from the SDKs you need
 import { FirebaseOptions, initializeApp } from 'firebase/app'
 import { getStorage } from 'firebase/storage'
 import { getAuth } from 'firebase/auth'
@@ -15,39 +14,26 @@ function getFirebaseRequiredConfig(): FirebaseOptions {
   const appId = process.env.NEXT_PUBLIC_APP_ID
   const databaseURL = process.env.NEXT_PUBLIC_DATABASE_URL
 
-  const requiredOptions = [apiKey, authDomain, projectId, storageBucket, messagingSenderId, appId, databaseURL].filter(
-    Boolean
-  )
+  const requiredAttributes = [apiKey, authDomain, projectId, storageBucket, messagingSenderId, appId, databaseURL]
 
-  console.log('requiredOptions: ', requiredOptions)
+  if (requiredAttributes.some(v => !v)) {
+    throw new Error('Erro nas variáveis de ambiente do Firebase')
+  }
 
-  console.log('requiredOptions.length === 7: ', requiredOptions.length === 7)
-
-  //DOC - Jeito mais rápido que eu pensei de verificar se todas as variáveis realmente
-  //existem sem ter que manualmente verificar todas
-  if (!!requiredOptions.length && requiredOptions.length === 7) {
-    return {
-      apiKey,
-      authDomain,
-      projectId,
-      storageBucket,
-      messagingSenderId,
-      appId,
-      databaseURL,
-    }
-  } else {
-    throw new Error('Foi detectado algum erro na configuração das variáveis de ambiente')
+  return {
+    apiKey,
+    authDomain,
+    projectId,
+    storageBucket,
+    messagingSenderId,
+    appId,
+    databaseURL,
   }
 }
 
-// Your web app's Firebase configuration
-const firebaseConfig: FirebaseOptions = {
-  ...getFirebaseRequiredConfig(),
-}
+const firebaseConfig: FirebaseOptions = getFirebaseRequiredConfig()
 
-// Initialize Firebase
 export const firebaseApp = initializeApp(firebaseConfig)
-
 export const firebaseAuth = getAuth(firebaseApp)
 export const firebaseStorage = getStorage(firebaseApp)
 export const firebaseDatabase = getDatabase(firebaseApp)

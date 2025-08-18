@@ -1,32 +1,26 @@
-import { ref, set, get, child, onValue, DataSnapshot, Unsubscribe } from 'firebase/database'
+import { ref, set, get, child, onValue, Unsubscribe } from 'firebase/database'
 import { firebaseDatabase } from '.'
 
-export function writeDataOvewrite(location: string, data: () => unknown): Promise<void> {
+export function writeDataOverwrite<T>(location: string, data: () => T): Promise<void> {
   return set(ref(firebaseDatabase, location), data())
 }
 
-export async function readDataOnce(location: string): Promise<DataSnapshot | undefined> {
-  return get(child(ref(firebaseDatabase), location))
-    .then(snapshot => {
-      if (snapshot.exists()) {
-        console.log(snapshot.val())
+export async function readDataOnce<T = unknown>(location: string): Promise<T | undefined> {
+  try {
+    const snapshot = await get(child(ref(firebaseDatabase), location))
 
-        return snapshot.val()
-      } else {
-        console.log('No data available')
-      }
-    })
-    .catch(error => {
-      console.error(error)
-    })
+    if (snapshot.exists()) {
+      return snapshot.val()
+    }
+  } catch (error) {
+    console.error(error)
+    throw error
+  }
 }
 
-export function readDataListener(location: string, callback: (value: any) => void): Unsubscribe {
+export function readDataListener<T = unknown>(location: string, callback: (value: T | null) => void): Unsubscribe {
   return onValue(ref(firebaseDatabase, location), snapshot => {
-    const value = snapshot.val()
-
-    console.log('value ->', value)
-
+    const value = snapshot.exists() ? (snapshot.val() as T) : null
     callback(value)
   })
 }
