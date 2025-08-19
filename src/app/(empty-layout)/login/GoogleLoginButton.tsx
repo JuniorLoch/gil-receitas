@@ -1,7 +1,7 @@
 'use client'
 
 import { Button, ButtonProps, HStack, Text } from '@chakra-ui/react'
-import { FcGoogle } from '@react-icons/all-files/fc/FcGoogle'
+import { FcGoogle } from 'react-icons/fc'
 
 interface GoogleLoginButtonProps extends ButtonProps {
   onClick: () => void

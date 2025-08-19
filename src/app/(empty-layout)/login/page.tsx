@@ -1,7 +1,7 @@
 'use client'
 
-import { GilGrid } from '@/app/(main-layout)/components/GilGrid'
-import { ColorModeButton } from '@/components/ui/color-mode'
+import { GilGrid } from '@/app/(dashboard)/components/GilGrid'
+import { ColorModeButton } from '@/app/components/color-mode'
 import { AspectRatio, GridItem } from '@chakra-ui/react'
 import { FormLogin } from './FormLogin'
 import bannerLoginImageLight from '@images/banner-paes-light.png'

@@ -51,7 +51,6 @@ export async function firebaseLoginInWithGoogle(): Promise<User | undefined> {
   try {
     await ensureLocalPersistence()
     const authResponse = await signInWithPopup(firebaseAuth, provider)
-    console.log('authResponse: ', authResponse)
 
     return authResponse.user
   } catch (error) {
@@ -68,8 +67,6 @@ export async function firebaseLoginWithCredentials(credentials: LoginFormProps):
       await ensureSessionPersistence()
     }
     const authResponse = await signInWithEmailAndPassword(firebaseAuth, credentials.email, credentials.senha)
-    console.log('authResponse: ', authResponse)
-    console.log('user response: ', authResponse.user)
 
     return authResponse.user
   } catch (error) {

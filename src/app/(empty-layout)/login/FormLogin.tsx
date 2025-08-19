@@ -1,14 +1,14 @@
 'use client'
 import { Button, Center, GridItem, Image, Stack } from '@chakra-ui/react'
-import { FormInput } from '@/app/(main-layout)/components/form/FormInput'
-import { VGilGrid } from '@/app/(main-layout)/components/VGilGrid'
+import { FormInput } from '@/app/(dashboard)/components/form/FormInput'
+import { VGilGrid } from '@/app/(dashboard)/components/VGilGrid'
 import { Form, Formik } from 'formik'
 import NextImage from 'next/image'
 import LogoLight from '@images/logo-light.png'
 import LogoDark from '@images/logo-dark.png'
 import { GoogleLoginButton } from './GoogleLoginButton'
 import { boolean, InferType, object, string } from 'yup'
-import { FormCheckbox } from '@/app/(main-layout)/components/form/FormCheckbox'
+import { FormCheckbox } from '@/app/(dashboard)/components/form/FormCheckbox'
 import { useAuth } from '@/app/components/auth-context/context'
 
 const loginFormValidationSchema = object({
@@ -45,7 +45,6 @@ export function FormLogin() {
           initialValues={loginFormInitialValues}
           validationSchema={loginFormValidationSchema}
           onSubmit={values => {
-            console.log('Valores do login->', values)
             login('Credentials', values)
           }}
         >

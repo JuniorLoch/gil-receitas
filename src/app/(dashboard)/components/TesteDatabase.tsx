@@ -1,23 +1,23 @@
 'use client'
 
-import { readDataListener, writeDataOvewrite } from '@/services/firebase/database'
+import { readDataListener, writeDataOverwrite } from '@/services/firebase/database'
 import { Button, Heading, List, Stack } from '@chakra-ui/react'
 import { nanoid } from 'nanoid'
 import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 
+type bomdia = Record<string, { bomdia: string }>
+
 export function TesteDatabase() {
-  const [values, setValues] = useState<Record<string, { bomdia: string }>>()
+  const [values, setValues] = useState<bomdia>()
 
   useEffect(() => {
-    return readDataListener('bomdia', data => {
-      setValues(data)
+    return readDataListener<bomdia>('bomdia', data => {
+      if (!!data) {
+        setValues(data)
+      }
     })
   }, [])
-
-  useEffect(() => {
-    console.log('valores ->', values)
-  }, [values])
 
   return (
     <>
@@ -26,7 +26,7 @@ export function TesteDatabase() {
           onClick={async () => {
             const randomN = nanoid(5)
 
-            const writeDataPromise = writeDataOvewrite(`bomdia/${randomN}`, () => ({ bomdia: `bomdia-${randomN}` }))
+            const writeDataPromise = writeDataOverwrite(`bomdia/${randomN}`, () => ({ bomdia: `bomdia-${randomN}` }))
 
             toast.promise(writeDataPromise, {
               error: 'Ocorreu um erro ao cadastrar bomdia',

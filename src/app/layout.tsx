@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
 import { Montserrat } from 'next/font/google'
-import { Provider } from '@/components/ui/provider'
+import { Provider } from '@/app/components/provider'
 
-import { Toaster } from './(main-layout)/components/toaster'
+import { Toaster } from './(dashboard)/components/toaster'
 import { AuthProvider } from './components/auth-context'
 import { RouteGuard } from './components/route-guard'
 

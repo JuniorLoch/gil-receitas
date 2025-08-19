@@ -14,7 +14,6 @@ export function AuthProvider({ children }: GenericComponent) {
   const [userData, setUserData] = useState<User | null>(null)
   const [loading, setLoading] = useState<Record<LoginMethods, boolean>>(loginLoadingFalse)
 
-  console.log('userData: ', userData)
   /** DOC
    * Hydration flow: initialize and synchronize auth state on mount, firebase
    * automatically handles any change to the auth state

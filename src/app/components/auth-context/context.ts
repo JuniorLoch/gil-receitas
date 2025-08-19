@@ -2,6 +2,7 @@
 
 import { createContext, useContext } from 'react'
 import type { AuthContextProps } from './types'
+import { User } from 'firebase/auth'
 
 /** DOC
  * Central context object for authentication state and actions.
@@ -35,4 +36,27 @@ export const AuthContext = createContext<AuthContextProps>({
  */
 export function useAuth(): AuthContextProps {
   return useContext(AuthContext)
+}
+
+/** DOC
+Returns the authenticated Firebase User (non-null).
+
+Assumptions:
+
+  - Must be used within a protected subtree (e.g., (dashboard) layout)
+  - that only renders after auth hydration and when the user is authenticated.
+  
+Behavior:
+
+If called when no user is present (e.g., used outside protected routes),
+it throws a descriptive error to fail fast during development.
+*/
+export function useDashboardUser(): User {
+  const { userData } = useAuth()
+
+  if (!userData) {
+    throw new Error('useRequiredUser: no authenticated user available (use only under protected routes)')
+  }
+
+  return userData
 }
