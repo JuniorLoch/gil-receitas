@@ -1,5 +1,5 @@
 'use client'
-import { Button, Center, GridItem, Image, Stack } from '@chakra-ui/react'
+import { Button, Center, GridItem, Image, Stack, Text } from '@chakra-ui/react'
 import { FormInput } from '@/app/(dashboard)/components/form/FormInput'
 import { VGilGrid } from '@/app/(dashboard)/components/VGilGrid'
 import { Form, Formik } from 'formik'
@@ -10,6 +10,7 @@ import { GoogleLoginButton } from './GoogleLoginButton'
 import { boolean, InferType, object, string } from 'yup'
 import { FormCheckbox } from '@/app/(dashboard)/components/form/FormCheckbox'
 import { useAuth } from '@/app/components/auth-context/context'
+import Link from 'next/link'
 
 const loginFormValidationSchema = object({
   email: string().email('Email inválido').required('O email é obrigatório'),
@@ -48,7 +49,7 @@ export function FormLogin() {
             login('Credentials', values)
           }}
         >
-          <Stack asChild gap={5}>
+          <Stack asChild gap={4}>
             <Form>
               <FormInput name={'email'} label={'Email'} />
               <FormInput name={'senha'} type={'password'} label={'Senha'} />
@@ -63,6 +64,12 @@ export function FormLogin() {
                     login('Google')
                   }}
                 />
+                <Center _dark={{ color: 'gray.400' }} _light={{ color: 'gray.800' }} fontSize={'sm'} gap={1}>
+                  Quer criar uma conta?
+                  <Text asChild fontWeight={'bold'} cursor={'pointer'} _hover={{ textDecor: 'underline' }}>
+                    <Link href={'/cadastro'}>Cadastre-se</Link>
+                  </Text>
+                </Center>
               </Stack>
             </Form>
           </Stack>

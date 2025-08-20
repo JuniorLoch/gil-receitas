@@ -1,13 +1,15 @@
-import { useDashboardUser } from '@/app/components/auth-context/context'
+import { useAuth, useDashboardUser } from '@/app/components/auth-context/context'
 import { Avatar, Box, HStack, Menu, Portal, Text } from '@chakra-ui/react'
-import { FaCog, FaUser, FaUserSlash } from 'react-icons/fa'
+import { FaUser, FaUserSlash } from 'react-icons/fa'
+import Link from 'next/link'
 
 export function AvatarMenu() {
   const userData = useDashboardUser()
+  const { logout } = useAuth()
 
   return (
     <Menu.Root positioning={{ placement: 'bottom' }}>
-      <Menu.Trigger focusRing='outside' rounded={'md'} _hover={{ cursor: 'pointer' }}>
+      <Menu.Trigger rounded={'md'} cursor='pointer'>
         <HStack>
           <Text> {userData.displayName}</Text>
           <Box rounded='full'>
@@ -21,17 +23,22 @@ export function AvatarMenu() {
       <Portal>
         <Menu.Positioner w={'3xs'}>
           <Menu.Content>
-            <Menu.Item value='account' p={2}>
-              <FaUser />
-              Account
+            <Menu.Item value='account' asChild p={2} cursor={'pointer'}>
+              <Link href={'/conta'}>
+                <FaUser />
+                Conta
+              </Link>
             </Menu.Item>
-            <Menu.Item value='settings' p={2}>
-              <FaCog />
-              Settings
-            </Menu.Item>
-            <Menu.Item value='logout' color='fg.error' _hover={{ bg: 'bg.error', color: 'fg.error' }} p={2}>
+            <Menu.Item
+              value='logout'
+              onClick={() => logout()}
+              color='fg.error'
+              _hover={{ bg: 'bg.error', color: 'fg.error' }}
+              cursor={'pointer'}
+              p={2}
+            >
               <FaUserSlash />
-              Logout
+              Sair
             </Menu.Item>
           </Menu.Content>
         </Menu.Positioner>

@@ -9,6 +9,7 @@ import {
   signOut,
   User,
   browserSessionPersistence,
+  createUserWithEmailAndPassword,
 } from 'firebase/auth'
 import { firebaseAuth } from '.'
 import { toast } from 'react-toastify'
@@ -44,6 +45,17 @@ export async function ensureLocalPersistence() {
  */
 export async function ensureSessionPersistence() {
   await setPersistence(firebaseAuth, browserSessionPersistence)
+}
+
+/** DOC
+ * Registers a new user using Firebase email/password
+ * @returns user object on success
+ * @throws error if registration fails
+ */
+export async function firebaseRegisterWithCredentials(email: string, password: string) {
+  const { user } = await createUserWithEmailAndPassword(firebaseAuth, email, password)
+
+  return user
 }
 
 export async function firebaseLoginInWithGoogle(): Promise<User | undefined> {
