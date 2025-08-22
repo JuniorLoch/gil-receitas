@@ -1,6 +1,6 @@
 'use client'
 
-import { Button, Center, GridItem, Image, Stack, Text } from '@chakra-ui/react'
+import { Button, Center, GridItem, Image, Link, Stack, Text } from '@chakra-ui/react'
 import { FormInput } from '@/app/(dashboard)/components/form/FormInput'
 import { VGilGrid } from '@/app/(dashboard)/components/VGilGrid'
 import { Form, Formik } from 'formik'
@@ -11,9 +11,10 @@ import { boolean, InferType, object, ref, string } from 'yup'
 import { useRouter } from 'next/navigation'
 import { FormCheckbox } from '@/app/(dashboard)/components/form/FormCheckbox'
 import { firebaseRegisterWithCredentials } from '@/services/firebase/auth'
-import Link from 'next/link'
+import NextLink from 'next/link'
 import { toast } from 'react-toastify'
 import { GilCard } from '@/app/(dashboard)/components/gil-card'
+import { useState } from 'react'
 
 const registerFormValidationSchema = object({
   email: string().email('Email inválido').required('O email é obrigatório'),
@@ -34,6 +35,7 @@ const registerFormInitialValues: RegisterFormProps = {
 }
 
 export function FormCadastro() {
+  const [loading, setLoading] = useState<boolean>(false)
   const router = useRouter()
 
   return (
@@ -54,8 +56,10 @@ export function FormCadastro() {
             initialValues={registerFormInitialValues}
             validationSchema={registerFormValidationSchema}
             onSubmit={async values => {
+              setLoading(true)
               await firebaseRegisterWithCredentials(values.email, values.senha)
               toast.success('Conta criada com sucesso!')
+              setLoading(false)
               router.replace('/login')
             }}
           >
@@ -64,14 +68,19 @@ export function FormCadastro() {
                 <FormInput name={'email'} label={'Email'} />
                 <FormInput name={'senha'} type={'password'} label={'Senha'} />
                 <FormInput name={'confirmarSenha'} type={'password'} label={'Confirmar senha'} />
-                <FormCheckbox name={'aceitarTermos'}>Li e aceito os termos de uso</FormCheckbox>
-                <Button w={'100%'} type={'submit'}>
+                <FormCheckbox name={'aceitarTermos'}>
+                  Li e aceito os{' '}
+                  <Link asChild fontWeight={'bold'}>
+                    <NextLink href={'/termos'}>termos de uso</NextLink>
+                  </Link>
+                </FormCheckbox>
+                <Button w={'100%'} type={'submit'} loading={loading}>
                   Cadastre-se
                 </Button>
                 <Center _dark={{ color: 'gray.400' }} _light={{ color: 'gray.800' }} fontSize={'sm'} gap={1}>
                   Já tem uma conta?
                   <Text asChild fontWeight={'bold'} cursor={'pointer'} _hover={{ textDecor: 'underline' }}>
-                    <Link href={'/login'}>Entrar</Link>
+                    <NextLink href={'/login'}>Entrar</NextLink>
                   </Text>
                 </Center>
               </Form>

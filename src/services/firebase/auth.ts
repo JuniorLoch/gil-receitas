@@ -14,6 +14,14 @@ import {
 import { firebaseAuth } from '.'
 import { toast } from 'react-toastify'
 import { LoginFormProps } from '@/app/(empty-layout)/login/FormLogin'
+import { FirebaseError } from 'firebase/app'
+import { FIREBASE_ERRORS } from '@/constants/firebase-errors'
+
+function logFirebaseError(error: unknown) {
+  if (error instanceof FirebaseError) {
+    toast.error(FIREBASE_ERRORS[error.code as keyof typeof FIREBASE_ERRORS])
+  }
+}
 
 export function onAppAuthStateChanged(callback: (user: User | null) => void) {
   return onAuthStateChanged(firebaseAuth, callback)
@@ -66,8 +74,7 @@ export async function firebaseLoginInWithGoogle(): Promise<User | undefined> {
 
     return authResponse.user
   } catch (error) {
-    toast.error('Erro ao entrar com o Google')
-    console.error('Error signing in with Google', error)
+    logFirebaseError(error)
   }
 }
 
@@ -82,8 +89,7 @@ export async function firebaseLoginWithCredentials(credentials: LoginFormProps):
 
     return authResponse.user
   } catch (error) {
-    toast.error('Erro ao entrar com email/senha')
-    console.error('Error signing in with Google', error)
+    logFirebaseError(error)
   }
 }
 
@@ -91,7 +97,6 @@ export async function firebaseLogout() {
   try {
     await signOut(firebaseAuth)
   } catch (error) {
-    toast.error('Erro ao sair')
-    console.error('Error logout with Google', error)
+    logFirebaseError(error)
   }
 }
