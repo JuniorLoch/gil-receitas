@@ -1,28 +1,28 @@
 'use client'
 
-// import { useEffect } from 'react'
-// import { useRouter } from 'next/navigation'
+import { useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 
 import { Box, HStack, Skeleton, Stack } from '@chakra-ui/react'
 import { Header } from './components/main-layout/header'
 import { Sidebar } from './components/main-layout/sidebar'
 import { isAuthHydrating } from '../components/auth-context/selectors'
 import { useAuth } from '../components/auth-context/context'
-// import { loginRoute } from '../components/route-guard/routes.const'
+import { loginRoute } from '../components/route-guard/routes.const'
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const { userData, loading } = useAuth()
-  // const router = useRouter()
+  const router = useRouter()
 
   const hydrating = isAuthHydrating(loading)
   const isAuthenticated = Boolean(userData)
 
-  // useEffect(() => {
-  //   //DOC - Redirect only after hydration resolves; avoid redirect loops during initial null
-  //   if (!hydrating && !isAuthenticated) {
-  //     router.replace(loginRoute)
-  //   }
-  // }, [hydrating, isAuthenticated, router])
+  useEffect(() => {
+    //DOC - Redirect only after hydration resolves; avoid redirect loops during initial null
+    if (!hydrating && !isAuthenticated) {
+      router.replace(loginRoute)
+    }
+  }, [hydrating, isAuthenticated, router])
 
   if (hydrating) {
     //OBS - Initial auth resolving: render a tiny shell/skeleton to avoid null user crashes
