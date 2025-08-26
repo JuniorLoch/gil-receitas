@@ -57,10 +57,12 @@ export function FormCadastro() {
             validationSchema={registerFormValidationSchema}
             onSubmit={async values => {
               setLoading(true)
-              await firebaseRegisterWithCredentials(values.email, values.senha)
-              toast.success('Conta criada com sucesso!')
+              const user = await firebaseRegisterWithCredentials(values.email, values.senha)
+              if (!!user) {
+                toast.success('Conta criada com sucesso!')
+                router.replace('/login')
+              }
               setLoading(false)
-              router.replace('/login')
             }}
           >
             <Stack asChild gap={2}>
