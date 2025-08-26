@@ -47,7 +47,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       <Header />
       <HStack gap={0} align={'start'}>
         <Sidebar />
-        <Box p={2} w={'100%'} maxH={'calc(100vh - 68px)'} overflow={'auto'}>
+        <Box p={2} w={'100%'} maxH={'calc(100vh - {sizes.header})'} overflow={'auto'}>
           {children}
         </Box>
       </HStack>
