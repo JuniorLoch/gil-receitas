@@ -6,6 +6,9 @@ const config = defineConfig({
   theme: {
     tokens: {
       colors: {},
+      sizes: {
+        header: { value: '68px' },
+      },
     },
   },
 })

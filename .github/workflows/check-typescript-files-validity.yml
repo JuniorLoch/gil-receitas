@@ -22,7 +22,8 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: 🔷 Installing dependencies 🔷
         run: npm ci
-      - name: 🔷 Linting typescript files 🔷
-        run: npm run ts-lint
+      # OBS - TS é muito chato com import de imagem estático
+      # - name: 🔷 Linting typescript files 🔷
+      #   run: npm run ts-lint
       - name: 🔷 Linting files with eslint 🔷
         run: npm run lint

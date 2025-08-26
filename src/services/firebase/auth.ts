@@ -61,11 +61,14 @@ export async function ensureSessionPersistence() {
  * @throws error if registration fails
  */
 export async function firebaseRegisterWithCredentials(email: string, password: string) {
-  const { user } = await createUserWithEmailAndPassword(firebaseAuth, email, password)
+  try {
+    const { user } = await createUserWithEmailAndPassword(firebaseAuth, email, password)
 
-  return user
+    return user
+  } catch (error) {
+    logFirebaseError(error)
+  }
 }
-
 export async function firebaseLoginInWithGoogle(): Promise<User | undefined> {
   const provider = new GoogleAuthProvider()
   try {
