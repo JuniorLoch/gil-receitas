@@ -39,8 +39,8 @@ export function FormCadastro() {
   const router = useRouter()
 
   return (
-    <GilCard maxH={'calc(100vh - 64px)'} overflow={'hidden'}>
-      <VGilGrid maxH={'calc(100vh - 64px)'} overflowY={'auto'}>
+    <GilCard maxH={'calc(100vh - {sizes.header})'} overflow={'hidden'}>
+      <VGilGrid maxH={'calc(100vh - {sizes.header})'} overflowY={'auto'}>
         <GridItem asChild rowSpan={4}>
           <Center>
             <Image asChild _light={{ display: 'none' }} alt='Logotipo' boxSize={'2xs'}>
