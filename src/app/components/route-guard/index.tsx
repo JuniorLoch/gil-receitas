@@ -18,6 +18,7 @@ export function RouteGuard({ children }: RouteGuardProps) {
 
   useEffect(() => {
     console.log('🚀 COMEÇO DE OPERAÇÃO')
+    console.log('userData: ', userData)
     if (!hydrating) {
       console.log('🔷 NÃO HIDRATANDO')
       const isAuthenticated = Boolean(userData)
