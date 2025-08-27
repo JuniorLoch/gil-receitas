@@ -12,7 +12,7 @@ import { loginLoadingFalse, loginLoadingTrue } from './loading.const'
 
 export function AuthProvider({ children }: GenericComponent) {
   const [userData, setUserData] = useState<User | null>(null)
-  const [loading, setLoading] = useState<Record<LoginMethods, boolean>>(loginLoadingFalse)
+  const [loading, setLoading] = useState<Record<LoginMethods, boolean>>(loginLoadingTrue)
 
   /** DOC
    * Hydration flow: initialize and synchronize auth state on mount, firebase

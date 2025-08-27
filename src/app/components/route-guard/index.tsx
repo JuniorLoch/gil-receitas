@@ -2,11 +2,7 @@
 
 import { useEffect } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
-import {
-  homeRoute,
-  loginRoute,
-  // , publicRoutes
-} from './routes.const'
+import { homeRoute, loginRoute, publicRoutes } from './routes.const'
 import { useAuth } from '../auth-context/context'
 import { isAuthHydrating } from '../auth-context/selectors'
 
@@ -26,7 +22,7 @@ export function RouteGuard({ children }: RouteGuardProps) {
     if (!hydrating) {
       console.log('🔷 NÃO HIDRATANDO')
       const isAuthenticated = Boolean(userData)
-      // const isPublicRoute = publicRoutes.has(pathname)
+      const isPublicRoute = publicRoutes.has(pathname)
 
       if (isAuthenticated) {
         console.log('🔷 AUTENTICADO')
@@ -37,17 +33,17 @@ export function RouteGuard({ children }: RouteGuardProps) {
         }
       } else {
         console.log('🔷 NÃO AUTENTICADO')
-        // if (!isPublicRoute) {
-        //   console.log('🔷 ROTA NÃO PUBLICA -> INDO PRA LOGIN')
-        //   console.log('✅ Fim de operação')
-        //   router.replace(loginRoute)
-        // }
+        if (!isPublicRoute) {
+          console.log('🔷 ROTA NÃO PUBLICA -> INDO PRA LOGIN')
+          console.log('✅ Fim de operação')
+          router.replace(loginRoute)
+        }
       }
     } else {
       console.log('🔷 HIDRATANDO')
       console.log('✅ Fim de operação')
     }
-  }, [pathname, userData])
+  }, [pathname, userData, loading])
 
   return <>{children}</>
 }
