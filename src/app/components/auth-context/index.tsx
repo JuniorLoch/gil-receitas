@@ -59,7 +59,7 @@ export function AuthProvider({ children }: GenericComponent) {
     setLoading(loginLoadingFalse)
   }
 
-  const value = useMemo(() => ({ userData, loading, login, logout }), [userData, loading])
+  // const value = useMemo(() => (), [userData, loading])
 
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
+  return <AuthContext.Provider value={{ userData, loading, login, logout }}>{children}</AuthContext.Provider>
 }

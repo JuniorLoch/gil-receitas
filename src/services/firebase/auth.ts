@@ -70,15 +70,10 @@ export async function firebaseRegisterWithCredentials(email: string, password: s
   }
 }
 export async function firebaseLoginInWithGoogle(): Promise<User | undefined> {
-  console.log('- testes de produção -')
-  console.log('firebaseAuth', firebaseAuth)
-
   const provider = new GoogleAuthProvider()
   try {
     await ensureLocalPersistence()
     const authResponse = await signInWithPopup(firebaseAuth, provider)
-
-    console.log('authResponse.user: ', authResponse.user)
 
     return authResponse.user
   } catch (error) {

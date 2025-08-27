@@ -42,7 +42,7 @@ export function RouteGuard({ children }: RouteGuardProps) {
       console.log('🔷 HIDRATANDO')
       console.log('✅ Fim de operação')
     }
-  }, [pathname])
+  }, [pathname, userData])
 
   return <>{children}</>
 }
