@@ -17,7 +17,7 @@ export function RouteGuard({ children }: RouteGuardProps) {
   const hydrating = isAuthHydrating(loading)
 
   useEffect(() => {
-    console.log('🔷 CAIU NO USEEFFECT ROUTEGUARD')
+    console.log('🚀 COMEÇO DE OPERAÇÃO')
     if (!hydrating) {
       console.log('🔷 NÃO HIDRATANDO')
       const isAuthenticated = Boolean(userData)
@@ -27,19 +27,22 @@ export function RouteGuard({ children }: RouteGuardProps) {
         console.log('🔷 AUTENTICADO')
         if (pathname === loginRoute) {
           console.log('🔷 AUTENTICADO EM LOGIN -> INDO PRA HOME')
+          console.log('✅ Fim de operação')
           router.replace(homeRoute)
         }
       } else {
         console.log('🔷 NÃO AUTENTICADO')
         if (!isPublicRoute) {
           console.log('🔷 ROTA NÃO PUBLICA -> INDO PRA LOGIN')
+          console.log('✅ Fim de operação')
           router.replace(loginRoute)
         }
       }
     } else {
       console.log('🔷 HIDRATANDO')
+      console.log('✅ Fim de operação')
     }
-  }, [loading, userData, pathname, router])
+  }, [pathname])
 
   return <>{children}</>
 }
