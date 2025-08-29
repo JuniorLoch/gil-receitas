@@ -38,6 +38,16 @@ export function FormCadastro() {
   const [loading, setLoading] = useState<boolean>(false)
   const router = useRouter()
 
+  async function handleSubmitRegister(values: RegisterFormProps) {
+    setLoading(true)
+    const user = await firebaseRegisterWithCredentials(values.email, values.senha)
+    if (!!user) {
+      toast.success('Conta criada com sucesso!')
+      router.replace('/login')
+    }
+    setLoading(false)
+  }
+
   return (
     <GilCard maxH={'calc(100vh - {sizes.header})'} overflow={'hidden'}>
       <VGilGrid maxH={'calc(100vh - {sizes.header})'} overflowY={'auto'}>
@@ -55,15 +65,7 @@ export function FormCadastro() {
           <Formik
             initialValues={registerFormInitialValues}
             validationSchema={registerFormValidationSchema}
-            onSubmit={async values => {
-              setLoading(true)
-              const user = await firebaseRegisterWithCredentials(values.email, values.senha)
-              if (!!user) {
-                toast.success('Conta criada com sucesso!')
-                router.replace('/login')
-              }
-              setLoading(false)
-            }}
+            onSubmit={handleSubmitRegister}
           >
             <Stack asChild gap={2}>
               <Form>
