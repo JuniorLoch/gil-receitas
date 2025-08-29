@@ -14,9 +14,9 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       { protocol: 'https', hostname: 'lh3.googleusercontent.com', pathname: '**' },
       { protocol: 'https', hostname: 'gilreceitas-20aa1.firebaseapp.com', pathname: '**' },
+      { protocol: 'https', hostname: 'gilreceitas-20aa1.web.app/', pathname: '**' },
     ],
   },
-
   /* config options here */
 }
 
