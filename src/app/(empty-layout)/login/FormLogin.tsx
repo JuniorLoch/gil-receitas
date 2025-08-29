@@ -11,6 +11,7 @@ import { boolean, InferType, object, string } from 'yup'
 import { FormCheckbox } from '@/app/(dashboard)/components/form/FormCheckbox'
 import { useAuth } from '@/app/components/auth-context/context'
 import Link from 'next/link'
+import { GilImage } from '@/app/components/GilImage'
 
 const loginFormValidationSchema = object({
   email: string().email('Email inválido').required('O email é obrigatório'),
@@ -34,7 +35,7 @@ export function FormLogin() {
       <GridItem asChild rowSpan={5}>
         <Center>
           <Image asChild _light={{ display: 'none' }} alt='Logotipo' boxSize={'xs'}>
-            <NextImage src={LogoDark} alt='Logotipo' unoptimized />
+            <GilImage src={LogoDark} alt='Logotipo' />
           </Image>
           <Image asChild _dark={{ display: 'none' }} alt='Logotipo' boxSize={'xs'}>
             <NextImage src={LogoLight} alt='Logotipo' />
