@@ -37,7 +37,7 @@ export function FormLogin() {
             <NextImage src={LogoDark} alt='Logotipo' unoptimized />
           </Image>
           <Image asChild _dark={{ display: 'none' }} alt='Logotipo' boxSize={'xs'}>
-            <NextImage src={LogoLight} alt='Logotipo' unoptimized />
+            <NextImage src={LogoLight} alt='Logotipo' />
           </Image>
         </Center>
       </GridItem>
