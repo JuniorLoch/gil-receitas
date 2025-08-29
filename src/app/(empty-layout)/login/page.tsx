@@ -4,7 +4,7 @@ import { GilGrid } from '@/app/(dashboard)/components/GilGrid'
 import { ColorModeButton } from '@/app/components/color-mode'
 import { AspectRatio, GridItem } from '@chakra-ui/react'
 import { FormLogin } from './FormLogin'
-
+import BannerDark from './banner-paes-dark.png'
 import NextImage from 'next/image'
 
 export default function LoginPage() {
@@ -23,13 +23,7 @@ export default function LoginPage() {
             />
           </AspectRatio>
           <AspectRatio h={'100%'} ratio={16 / 9} _light={{ display: 'none' }}>
-            <NextImage
-              src={'/images/banner-paes-dark.png'}
-              alt='Imagem do banner de login'
-              width={1024}
-              height={1024}
-              priority
-            />
+            <NextImage src={BannerDark} alt='Imagem do banner de login' width={1024} height={1024} priority />
           </AspectRatio>
         </GridItem>
         <GridItem colSpan={4}>
