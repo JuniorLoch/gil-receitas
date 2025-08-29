@@ -4,7 +4,6 @@ import { Button, Center, GridItem, Image, Link, Stack, Text } from '@chakra-ui/r
 import { FormInput } from '@/app/(dashboard)/components/form/FormInput'
 import { VGilGrid } from '@/app/(dashboard)/components/VGilGrid'
 import { Form, Formik } from 'formik'
-import NextImage from 'next/image'
 import LogoLight from '@images/logo-light.png'
 import LogoDark from '@images/logo-dark.png'
 import { boolean, InferType, object, ref, string } from 'yup'
@@ -15,6 +14,7 @@ import NextLink from 'next/link'
 import { toast } from 'react-toastify'
 import { GilCard } from '@/app/(dashboard)/components/gil-card'
 import { useState } from 'react'
+import { GilImage } from '@/app/components/GilImage'
 
 const registerFormValidationSchema = object({
   email: string().email('Email inválido').required('O email é obrigatório'),
@@ -54,10 +54,10 @@ export function FormCadastro() {
         <GridItem asChild rowSpan={4}>
           <Center>
             <Image asChild _light={{ display: 'none' }} alt='Logotipo' boxSize={'2xs'}>
-              <NextImage src={LogoDark} alt='Logotipo' />
+              <GilImage src={LogoDark} alt='Logotipo' />
             </Image>
             <Image asChild _dark={{ display: 'none' }} alt='Logotipo' boxSize={'2xs'}>
-              <NextImage src={LogoLight} alt='Logotipo' />
+              <GilImage src={LogoLight} alt='Logotipo' />
             </Image>
           </Center>
         </GridItem>

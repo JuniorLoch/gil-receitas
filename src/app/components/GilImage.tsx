@@ -1,7 +1,10 @@
 // components/Image.js
-import NextImage, { ImageProps } from 'next/image'
+import NextImage, { ImageLoader, ImageProps } from 'next/image'
 
-const customLoader = ({ src }: { src: any }) => {
+const customLoader: ImageLoader = ({ src, width, quality }) => {
+  console.log('width: ', width)
+  console.log('quality: ', quality)
+
   return src
 }
 

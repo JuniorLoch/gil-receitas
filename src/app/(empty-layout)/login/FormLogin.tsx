@@ -3,7 +3,6 @@ import { Button, Center, GridItem, Image, Stack, Text } from '@chakra-ui/react'
 import { FormInput } from '@/app/(dashboard)/components/form/FormInput'
 import { VGilGrid } from '@/app/(dashboard)/components/VGilGrid'
 import { Form, Formik } from 'formik'
-import NextImage from 'next/image'
 import LogoLight from '@images/logo-light.png'
 import LogoDark from '@images/logo-dark.png'
 import { GoogleLoginButton } from './GoogleLoginButton'
@@ -38,7 +37,7 @@ export function FormLogin() {
             <GilImage src={LogoDark} alt='Logotipo' />
           </Image>
           <Image asChild _dark={{ display: 'none' }} alt='Logotipo' boxSize={'xs'}>
-            <NextImage src={LogoLight} alt='Logotipo' />
+            <GilImage src={LogoLight} alt='Logotipo' />
           </Image>
         </Center>
       </GridItem>
