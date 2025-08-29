@@ -5,6 +5,8 @@ import { ColorModeButton } from '@/app/components/color-mode'
 import { AspectRatio, GridItem } from '@chakra-ui/react'
 import { FormLogin } from './FormLogin'
 import { GilImage } from '@/app/components/GilImage'
+import BannerLight from '@images/banner-paes-light.png'
+import BannerDark from '@images/banner-paes-dark.png'
 
 export default function LoginPage() {
   return (
@@ -14,20 +16,20 @@ export default function LoginPage() {
         <GridItem colSpan={8}>
           <AspectRatio h={'100%'} ratio={16 / 9} _dark={{ display: 'none' }}>
             <GilImage
-              src={'/images/banner-paes-light.png'}
-              alt='Imagem do banner de login'
-              width={1024}
-              height={1024}
-              priority
+              nextProps={{
+                src: BannerLight,
+                alt: 'Imagem do banner de login',
+                priority: true,
+              }}
             />
           </AspectRatio>
           <AspectRatio h={'100%'} ratio={16 / 9} _light={{ display: 'none' }}>
             <GilImage
-              src={'/images/banner-paes-dark.png'}
-              alt='Imagem do banner de login'
-              width={1024}
-              height={1024}
-              priority
+              nextProps={{
+                src: BannerDark,
+                alt: 'Imagem do banner de login',
+                priority: true,
+              }}
             />
           </AspectRatio>
         </GridItem>

@@ -1,6 +1,6 @@
 'use client'
 
-import { Button, Center, GridItem, Image, Link, Stack, Text } from '@chakra-ui/react'
+import { Button, Center, GridItem, Link, Stack, Text } from '@chakra-ui/react'
 import { FormInput } from '@/app/(dashboard)/components/form/FormInput'
 import { VGilGrid } from '@/app/(dashboard)/components/VGilGrid'
 import { Form, Formik } from 'formik'
@@ -53,12 +53,8 @@ export function FormCadastro() {
       <VGilGrid maxH={'calc(100vh - {sizes.header})'} overflowY={'auto'}>
         <GridItem asChild rowSpan={4}>
           <Center>
-            <Image asChild _light={{ display: 'none' }} alt='Logotipo' boxSize={'2xs'}>
-              <GilImage src={LogoDark} alt='Logotipo' />
-            </Image>
-            <Image asChild _dark={{ display: 'none' }} alt='Logotipo' boxSize={'2xs'}>
-              <GilImage src={LogoLight} alt='Logotipo' />
-            </Image>
+            <GilImage _light={{ display: 'none' }} boxSize={'2xs'} nextProps={{ src: LogoDark, alt: 'Logotipo' }} />
+            <GilImage _dark={{ display: 'none' }} boxSize={'2xs'} nextProps={{ src: LogoLight, alt: 'Logotipo' }} />
           </Center>
         </GridItem>
         <GridItem rowSpan={8}>
