@@ -34,10 +34,10 @@ export function FormLogin() {
       <GridItem asChild rowSpan={5}>
         <Center>
           <Image asChild _light={{ display: 'none' }} alt='Logotipo' boxSize={'xs'}>
-            <NextImage src={LogoDark} alt='Logotipo' />
+            <NextImage src={LogoDark} alt='Logotipo' unoptimized />
           </Image>
           <Image asChild _dark={{ display: 'none' }} alt='Logotipo' boxSize={'xs'}>
-            <NextImage src={LogoLight} alt='Logotipo' />
+            <NextImage src={LogoLight} alt='Logotipo' unoptimized />
           </Image>
         </Center>
       </GridItem>

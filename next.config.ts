@@ -17,6 +17,7 @@ const nextConfig: NextConfig = {
       { protocol: 'https', hostname: 'gilreceitas-20aa1.web.app/', pathname: '**' },
     ],
   },
+
   /* config options here */
 }
 

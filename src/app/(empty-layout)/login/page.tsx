@@ -20,6 +20,7 @@ export default function LoginPage() {
               width={1024}
               height={1024}
               priority
+              unoptimized
             />
           </AspectRatio>
           <AspectRatio h={'100%'} ratio={16 / 9} _light={{ display: 'none' }}>
@@ -29,6 +30,7 @@ export default function LoginPage() {
               width={1024}
               height={1024}
               priority
+              unoptimized
             />
           </AspectRatio>
         </GridItem>

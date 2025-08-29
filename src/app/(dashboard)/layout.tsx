@@ -16,18 +16,6 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   const hydrating = isAuthHydrating(loading)
   const isAuthenticated = Boolean(userData)
 
-  // useEffect(() => {
-  //   //DOC - Redirect only after hydration resolves; avoid redirect loops during initial
-  //   //null
-  //   console.log('💥 CAIU NO USEEFFECT LAYOUT DASHBOARD')
-  //   if (!hydrating && !isAuthenticated) {
-  //     console.log('💥 NÃO AUTENTICADO E NÃO HIDRATANDO')
-  //     router.replace(loginRoute)
-  //   } else {
-  //     console.log('💥 AUTENTICADO OU HIDRATANDO')
-  //   }
-  // }, [hydrating, isAuthenticated, router])
-
   if (hydrating) {
     //OBS - Initial auth resolving: render a tiny shell/skeleton to avoid null user crashes
     return (
