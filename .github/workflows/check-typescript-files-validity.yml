@@ -1,0 +1,29 @@
+name: Check typescript files validity
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [22.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+      - name: 🔷 Checkout branch to local machine 🔷
+        uses: actions/checkout@v4
+      - name: 🔷 Using Node.js version ${{ matrix.node-version }} 🔷
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: 🔷 Installing dependencies 🔷
+        run: npm ci
+      # OBS - TS é muito chato com import de imagem estático
+      # - name: 🔷 Linting typescript files 🔷
+      #   run: npm run ts-lint
+      - name: 🔷 Linting files with eslint 🔷
+        run: npm run lint
