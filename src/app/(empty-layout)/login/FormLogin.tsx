@@ -1,9 +1,8 @@
 'use client'
-import { Button, Center, GridItem, Image, Stack, Text } from '@chakra-ui/react'
+import { Button, Center, GridItem, Stack, Text } from '@chakra-ui/react'
 import { FormInput } from '@/app/(dashboard)/components/form/FormInput'
 import { VGilGrid } from '@/app/(dashboard)/components/VGilGrid'
 import { Form, Formik } from 'formik'
-import NextImage from 'next/image'
 import LogoLight from '@images/logo-light.png'
 import LogoDark from '@images/logo-dark.png'
 import { GoogleLoginButton } from './GoogleLoginButton'
@@ -11,6 +10,7 @@ import { boolean, InferType, object, string } from 'yup'
 import { FormCheckbox } from '@/app/(dashboard)/components/form/FormCheckbox'
 import { useAuth } from '@/app/components/auth-context/context'
 import Link from 'next/link'
+import { GilImage } from '@/app/components/GilImage'
 
 const loginFormValidationSchema = object({
   email: string().email('Email inválido').required('O email é obrigatório'),
@@ -33,12 +33,14 @@ export function FormLogin() {
     <VGilGrid w={'100%'} h={'100%'} p={4}>
       <GridItem asChild rowSpan={5}>
         <Center>
-          <Image asChild _light={{ display: 'none' }} alt='Logotipo' boxSize={'xs'}>
-            <NextImage src={LogoDark} alt='Logotipo' />
-          </Image>
-          <Image asChild _dark={{ display: 'none' }} alt='Logotipo' boxSize={'xs'}>
-            <NextImage src={LogoLight} alt='Logotipo' />
-          </Image>
+          <GilImage nextProps={{ src: LogoDark, alt: 'Logotipo' }} _light={{ display: 'none' }} boxSize={'xs'} />
+
+          <GilImage
+            nextProps={{ src: LogoLight, alt: 'Logotipo' }}
+            _dark={{ display: 'none' }}
+            alt='Logotipo'
+            boxSize={'xs'}
+          />
         </Center>
       </GridItem>
       <GridItem rowSpan={7}>

@@ -1,21 +1,28 @@
 import { ColorModeButton } from '@/app/components/color-mode'
-import { Flex, Heading, HStack, Image } from '@chakra-ui/react'
-import NextImage from 'next/image'
+import { Flex, Heading, HStack } from '@chakra-ui/react'
 import { APP_NAME } from '@/constants/app-name.const'
 import { AvatarMenu } from './AvatarMenu'
 import LogoLight from '@images/logo-light.png'
 import LogoDark from '@images/logo-dark.png'
+import { GilImage } from '@/app/components/GilImage'
 
 export function Header() {
   return (
     <Flex justifyContent={'space-between'} bg={'bg.muted'} p={2}>
       <HStack>
-        <Image asChild borderRadius='full' fit='cover' alt='Logotipo' _dark={{ display: 'none' }}>
-          <NextImage alt='Logotipo' width={50} height={50} src={LogoLight}></NextImage>
-        </Image>
-        <Image asChild borderRadius='full' fit='cover' alt='Logotipo' _light={{ display: 'none' }}>
-          <NextImage alt='Logotipo' width={50} height={50} src={LogoDark}></NextImage>
-        </Image>
+        <GilImage
+          borderRadius='full'
+          fit='cover'
+          _dark={{ display: 'none' }}
+          nextProps={{ src: LogoLight, alt: 'Logotipo', width: 50, height: 50 }}
+        />
+
+        <GilImage
+          borderRadius='full'
+          fit='cover'
+          _light={{ display: 'none' }}
+          nextProps={{ src: LogoDark, alt: 'Logotipo', width: 50, height: 50 }}
+        />
 
         <Heading size='lg'>{APP_NAME}</Heading>
       </HStack>
