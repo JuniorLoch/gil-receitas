@@ -13,9 +13,7 @@ export function FormTextArea({ name, label, required, ...props }: FormTextAreaPr
 
   return (
     <Field.Root required={!!required} invalid={invalid}>
-      <Field.Label fontSize={['sm', 'sm', 'md', 'md']} color='blue.500'>
-        {label}
-      </Field.Label>
+      <Field.Label fontSize={['sm', 'sm', 'md', 'md']}>{label}</Field.Label>
       <Textarea {...field} {...props} />
       {invalid && <Field.ErrorText color={'red.500'}>{meta.error}</Field.ErrorText>}
     </Field.Root>
