@@ -15,7 +15,7 @@ export function FormSelect({ label, required, name, loading, children, placehold
 
   return (
     <Field.Root required={!!required} invalid={invalid}>
-      {label && <Field.Label color={'blue.500'}>{label}</Field.Label>}
+      {label && <Field.Label>{label}</Field.Label>}
       <InputGroup endElement={loading && <Spinner size='md' color='yellow.800' />}>
         <NativeSelect.Root {...props} disabled={loading} fontSize={['sm', 'sm', 'md', 'md']}>
           <NativeSelect.Field {...field} placeholder={placeholder || ''}>
