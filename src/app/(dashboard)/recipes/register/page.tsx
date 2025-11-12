@@ -6,8 +6,9 @@ import { array, InferType, mixed, object, string } from 'yup'
 import { FormInput } from '../../components/form/FormInput'
 import { Button, Card, GridItem, Heading } from '@chakra-ui/react'
 import { FormImageUpload } from '../../components/form/FormImageUpload'
-import { FormTextArea } from '../../components/form/FormTextArea'
+import { FormTextEditorField } from '../../components/form/form-text-editor/FormTextEditorField'
 import { FormSelect } from '../../components/form/FormSelect'
+import { AppTooltip } from '@/app/components/tooltip'
 
 const recipeFormValidationSchema = object({
   nome: string().required('O nome é obrigatório').max(30, 'O nome é muito grande!'),
@@ -51,24 +52,24 @@ export default function RegisterRecipePage() {
                 <FormInput name='nome' label='Nome' />
               </GridItem>
               <GridItem colSpan={6}>
-                {/* <FormInput name='categoria' label='Categoria' /> */}
-                <FormSelect name='categoria' label='Categoria'>
-                  <option value=''>Selecione uma categoria</option>
+                <FormSelect name='categoria' label='Categoria' placeholder='Selecione uma categoria'>
                   <option value={'doce'}>Doce</option>
                   <option value={'salgado'}>Salgado</option>
                 </FormSelect>
               </GridItem>
               <GridItem colSpan={6}>
-                <FormInput name='link' label='Link' />
+                <AppTooltip content='Link do site, ou post de mídia social que achou essa receita'>
+                  <FormInput name='link' label='Link' />
+                </AppTooltip>
               </GridItem>
               <GridItem colSpan={12}>
                 <FormImageUpload name='imagem' label='Imagem' />
               </GridItem>
               <GridItem colSpan={12}>
-                <FormTextArea name='ingredientes' label='Ingredientes' autoresize maxHeight={'15lh'} />
+                <FormTextEditorField name='ingredientes' label='Ingredientes' />
               </GridItem>
               <GridItem colSpan={12}>
-                <FormTextArea name='modoPreparo' label='Modo de Preparo' autoresize maxHeight={'15lh'} />
+                <FormTextEditorField name='modoPreparo' label='Modo de Preparo' />
               </GridItem>
               <GridItem colSpan={12} display={'flex'} justifyContent={'end'}>
                 <Button type='submit'>Cadastrar</Button>
