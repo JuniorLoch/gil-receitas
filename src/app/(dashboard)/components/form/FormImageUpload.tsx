@@ -12,7 +12,6 @@ interface FormImageUploadProps extends FileUpload.RootProps {
 export function FormImageUpload({ label, required, name, maxFiles = 1, ...props }: FormImageUploadProps) {
   const [field, meta] = useField(name)
   const isInvalid = !!meta.touched && !!meta.error
-  console.log('meta: ', meta)
 
   return (
     <Field.Root required={!!required} invalid={isInvalid}>

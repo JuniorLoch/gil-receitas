@@ -6,9 +6,9 @@ import { array, InferType, mixed, object, string } from 'yup'
 import { FormInput } from '../../components/form/FormInput'
 import { Button, Card, GridItem, Heading } from '@chakra-ui/react'
 import { FormImageUpload } from '../../components/form/FormImageUpload'
-import { FormTextEditorField } from '../../components/form/form-text-editor/FormTextEditorField'
 import { FormSelect } from '../../components/form/FormSelect'
 import { AppTooltip } from '@/app/components/tooltip'
+import { FormTextEditor } from '@/app/(dashboard)/components/form/form-text-editor'
 
 const recipeFormValidationSchema = object({
   nome: string().required('O nome é obrigatório').max(30, 'O nome é muito grande!'),
@@ -66,10 +66,10 @@ export default function RegisterRecipePage() {
                 <FormImageUpload name='imagem' label='Imagem' />
               </GridItem>
               <GridItem colSpan={12}>
-                <FormTextEditorField name='ingredientes' label='Ingredientes' />
+                <FormTextEditor name='ingredientes' label='Ingredientes' markdown='bomdia bomdia' />
               </GridItem>
               <GridItem colSpan={12}>
-                <FormTextEditorField name='modoPreparo' label='Modo de Preparo' />
+                <FormTextEditor name='modoPreparo' label='Modo de Preparo' markdown='boa noite boa notie' />
               </GridItem>
               <GridItem colSpan={12} display={'flex'} justifyContent={'end'}>
                 <Button type='submit'>Cadastrar</Button>

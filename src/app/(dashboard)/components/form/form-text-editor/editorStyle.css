@@ -1,0 +1,23 @@
+/* .editorContent {
+  color: white;
+} */
+
+.editor {
+  width: 100%;
+  border: 1px solid #272727;
+  border-radius: 8px;
+  /* background-color: gray; */
+
+  .mdxeditor-toolbar {
+    span {
+      button {
+        background-color: #272727;
+      }
+    }
+  }
+}
+
+.mdxeditor-select-content {
+  background-color: #272727;
+  border-radius: 8px;
+}
