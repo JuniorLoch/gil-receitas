@@ -1,6 +1,6 @@
 'use client'
 
-import { SearchRecipeVirtualParams, searchRecipes, RecipeVirtualData } from '@/actions/client/recipes'
+import { SearchRecipeParams, searchRecipes, RecipeRecord } from '@/actions/recipes'
 import { GenericContext } from '@/interfaces/generic-context'
 import { createContext, use, useCallback, useEffect, useState } from 'react'
 
@@ -18,9 +18,9 @@ export const defaultRecipePagination = {
 }
 
 type CreateRecipesContextProps = {
-  recipeList: Array<RecipeVirtualData>
+  recipeList: Array<RecipeRecord>
   searchFilters: RecipeSearchFilters
-  handleSearchRecipeVirtual: (searchFilters?: SearchRecipeVirtualParams) => Promise<void>
+  handleSearchRecipeVirtual: (searchFilters?: SearchRecipeParams) => Promise<void>
 }
 
 const CreateRecipesContext = createContext<CreateRecipesContextProps>({
@@ -32,11 +32,11 @@ const CreateRecipesContext = createContext<CreateRecipesContextProps>({
 export const useRecipesContext = () => use(CreateRecipesContext)
 
 export default function RecipesContext({ children }: GenericContext) {
-  const [recipeList, setRecipeList] = useState<Array<RecipeVirtualData>>([])
+  const [recipeList, setRecipeList] = useState<Array<RecipeRecord>>([])
   const [searchFilters, setSearchFilters] = useState<RecipeSearchFilters>(defaultRecipePagination)
 
   const handleSearchRecipeVirtual = useCallback(
-    async (newSearchFilters?: SearchRecipeVirtualParams) => {
+    async (newSearchFilters?: SearchRecipeParams) => {
       const response = await searchRecipes({
         ...(!!newSearchFilters ? newSearchFilters : searchFilters),
       })

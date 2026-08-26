@@ -15,3 +15,15 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - Dashboard with charts and forms using Chakra UI, Formik, and Recharts
 - Images from Firebase Storage require `remotePatterns` configuration
 - Current TypeScript setup: strict mode, ESLint flat config v9
+
+## Agent Coding Style
+
+When making code changes in this repository, follow these style constraints to keep the codebase readable and consistent:
+
+- Use constants only: prefer `const` for all bindings; avoid `let` and mutation unless there's a demonstrated, unavoidable need.
+- Single return: avoid premature/early `return` statements inside functions; prefer computing final values and returning once at the end of the function for readability.
+- Avoid nested conditionals: keep control flow flat — prefer early-exit-less patterns, ternaries, or small helper functions to reduce nesting.
+- No single-letter variables: use descriptive variable names (e.g., `rawRecipe`, `startIndex`) even for callbacks.
+- Use the `slugify` npm package for slug generation instead of custom implementations. Add it to `package.json` and install with `npm i slugify`.
+
+These rules are intentionally opinionated to make code easier for humans to read and maintain. If a specific change cannot follow these rules for technical reasons, document the rationale in a short comment near the relevant code.
