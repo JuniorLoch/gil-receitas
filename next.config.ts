@@ -2,13 +2,7 @@ import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
   experimental: {
-    optimizePackageImports: ['@chakra-ui/react'],
-  },
-  modularizeImports: {
-    'react-icons/?(((\\w*)?/?)*)': {
-      transform: '@react-icons/all-files/{{ matches.[1] }}/{{ member }}',
-      skipDefaultConversion: true,
-    },
+    optimizePackageImports: ['@chakra-ui/react', 'react-icons'],
   },
   images: {
     remotePatterns: [
@@ -17,8 +11,6 @@ const nextConfig: NextConfig = {
       { protocol: 'https', hostname: 'gilreceitas-20aa1.web.app/', pathname: '**' },
     ],
   },
-
-  /* config options here */
 }
 
 export default nextConfig
